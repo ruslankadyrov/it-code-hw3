@@ -4,11 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="author" content="Кадыров Руслан" />
     <title>AKU AKAGE ToDoList</title>
-    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="wrapper">
-      <div class="container"></div>
+    <div class="todo">
+      <div class="todo_content">
+        <h1 class="todo_header">Задачи</h1>
+        <div class="todo_new">
+          <input type="text" placeholder="Новая задача" />
+          <div class="todo_add">+</div>
+        </div>
+        <div class="todo_list">
+          <div class="todo_task">
+            <label class="todo_checkbox">
+              <input type="checkbox" />
+            </label>
+            <div class="todo_task-text">Lorem ipsum dolor sit amet.</div>
+            <img
+              class="todo_task-delete"
+              src="images/delete.png"
+              alt="delete"
+            />
+          </div>
+        </div>
+      </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
