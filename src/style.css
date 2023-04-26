@@ -68,6 +68,11 @@ body {
   align-items: center;
 }
 
+.todo_task_task_complete .todo_task-text {
+  text-decoration: line-through;
+  color: rgb(88, 88, 88);
+}
+
 .todo_task:hover .todo_task-delete {
   display: block;
 }

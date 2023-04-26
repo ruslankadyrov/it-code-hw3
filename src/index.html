@@ -11,16 +11,17 @@
       <div class="todo_content">
         <h1 class="todo_header">Задачи</h1>
         <div class="todo_new">
-          <input type="text" placeholder="Новая задача" />
-          <div class="todo_add">+</div>
+          <input id="new" type="text" placeholder="Новая задача" />
+          <div id="add" class="todo_add">+</div>
         </div>
-        <div class="todo_list">
-          <div class="todo_task">
+
+        <div id="tasks" class="todo_list">
+          <div class="todo_task todo_task_task_complete">
             <label class="todo_checkbox">
               <input type="checkbox" />
               <div></div>
             </label>
-            <div class="todo_task-text">Lorem ipsum dolor sit amet.</div>
+            <div class="todo_task-text">Всем привет, я задача</div>
             <img
               class="todo_task-delete"
               src="images/delete.png"
@@ -33,7 +34,7 @@
               <input type="checkbox" />
               <div></div>
             </label>
-            <div class="todo_task-text">Lorem ipsum dolor sit amet.</div>
+            <div class="todo_task-text">Всем привет, я задача.</div>
             <img
               class="todo_task-delete"
               src="images/delete.png"
