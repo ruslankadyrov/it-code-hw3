@@ -4,8 +4,6 @@ const dom = {
   tasks: document.querySelector("#tasks"),
 };
 
-console.log(dom);
-
 // const dom = {
 //   new: document.getElementById("new"),
 //   add: document.getElementById("add"),
@@ -75,7 +73,7 @@ function taskRender(array) {
       <input type="checkbox" ${checkboxChecked} />
       <div class="todo_checkbox-div"></div>
     </label>
-    <div class="todo_task-text">${task.text}</div>
+    <div class="todo_task-text" contenteditable ="false">${task.text}</div>
     <img class="todo_task-edit" src="images/edit.png" alt="edit" />
     <img class="todo_task-delete" src="images/delete.png" alt="delete"
     />
@@ -88,11 +86,12 @@ function taskRender(array) {
   dom.tasks.innerHTML = htmlList;
 }
 
-//отслеживание клика по чекбоксу
+//отслеживание клика по элементам
 dom.tasks.onclick = (event) => {
   const target = event.target;
   const isCheckboxElement = target.classList.contains("todo_checkbox-div");
   const isDeleteElement = target.classList.contains("todo_task-delete");
+  const isEditElement = target.classList.contains("todo_task-edit");
 
   if (isCheckboxElement) {
     const task = target.parentElement.parentElement;
@@ -105,6 +104,13 @@ dom.tasks.onclick = (event) => {
     const task = target.parentElement;
     const taskId = task.getAttribute("id");
     deleteTask(taskId, tasks);
+    taskRender(tasks);
+  }
+
+  if (isEditElement) {
+    const task = target.parentElement;
+    const taskId = task.getAttribute("id");
+    editTask(taskId, tasks);
     taskRender(tasks);
   }
 };
@@ -126,3 +132,14 @@ function deleteTask(id, array) {
     }
   });
 }
+
+//функция редактирования задачи
+function editTask(id, array) {
+  array.forEach((task) => {
+    if (task.id == id) {
+      task.text = "изменен";
+    }
+  });
+}
+
+// document.getElementById("name").focus()
