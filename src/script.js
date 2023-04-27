@@ -12,6 +12,7 @@ console.log(dom);
 //   tasks: document.getElementById("tasks"),
 // };
 
+//массив задач
 const tasks = [];
 
 dom.add.onclick = () => {
@@ -72,14 +73,11 @@ function taskRender(array) {
     <div id="${task.id}" class="${classToDoTask}">
     <label class="todo_checkbox">
       <input type="checkbox" ${checkboxChecked} />
-      <div></div>
+      <div class="todo_checkbox-div"></div>
     </label>
     <div class="todo_task-text">${task.text}</div>
     <img class="todo_task-edit" src="images/edit.png" alt="edit" />
-    <img
-      class="todo_task-delete"
-      src="images/delete.png"
-      alt="delete"
+    <img class="todo_task-delete" src="images/delete.png" alt="delete"
     />
     </div>
     `;
@@ -88,4 +86,43 @@ function taskRender(array) {
   });
 
   dom.tasks.innerHTML = htmlList;
+}
+
+//отслеживание клика по чекбоксу
+dom.tasks.onclick = (event) => {
+  const target = event.target;
+  const isCheckboxElement = target.classList.contains("todo_checkbox-div");
+  const isDeleteElement = target.classList.contains("todo_task-delete");
+
+  if (isCheckboxElement) {
+    const task = target.parentElement.parentElement;
+    const taskId = task.getAttribute("id");
+    changeTaskSatatus(taskId, tasks);
+    taskRender(tasks);
+  }
+
+  if (isDeleteElement) {
+    const task = target.parentElement;
+    const taskId = task.getAttribute("id");
+    deleteTask(taskId, tasks);
+    taskRender(tasks);
+  }
+};
+
+//функция изменения статуса
+function changeTaskSatatus(id, array) {
+  array.forEach((task) => {
+    if (task.id == id) {
+      task.isComplele = !task.isComplele;
+    }
+  });
+}
+
+//функция удаления задачи
+function deleteTask(id, array) {
+  array.forEach((task, index) => {
+    if (task.id == id) {
+      array.splice(index, 1);
+    }
+  });
 }
