@@ -80,6 +80,10 @@ body {
   display: block;
 }
 
+.todo_task:hover .todo_task-edit {
+  display: block;
+}
+
 .todo_checkbox {
   margin-right: 16px;
   margin-left: 7px;
@@ -121,8 +125,10 @@ body {
 
 .todo_task-text {
   font-size: 25px;
+  margin-right: 7px;
 }
-.todo_task-delete {
+.todo_task-delete,
+.todo_task-edit {
   cursor: pointer;
   display: none;
   /* margin-left: auto; */
