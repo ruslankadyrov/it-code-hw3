@@ -13,19 +13,35 @@ const dom = {
 const tasks = [];
 
 dom.add.onclick = () => {
-  const task = dom.new.value;
-  if (task) {
-    addTask(task);
+  const newTaskText = dom.new.value;
+  if (newTaskText && isNotHaveTask(newTaskText, tasks)) {
+    addTask(newTaskText, tasks);
+    dom.new.value = "";
   }
 };
 
-function addTask(text) {
+function addTask(text, array) {
   const timeStamp = Date.now();
+
   const task = {
     id: timeStamp,
     text: text,
     isComplele: false,
   };
-  tasks.push(task);
+
+  array.push(task);
   console.log(tasks);
+}
+
+function isNotHaveTask(text, array) {
+  let isNotHave = true;
+
+  array.forEach((task) => {
+    if (task.text === text) {
+      alert("Задача уже существует");
+      isNotHave = false;
+    }
+  });
+
+  return isNotHave;
 }
