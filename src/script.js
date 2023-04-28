@@ -33,7 +33,6 @@ function addTask(text, array) {
   };
 
   array.push(task);
-  console.log(tasks);
 }
 
 function isNotHaveTask(text, array) {
@@ -84,7 +83,7 @@ function taskRender(array) {
       <input type="checkbox" ${checkboxChecked} />
       <div class="todo_checkbox-div"></div>
     </label>
-    <div class="todo_task-text" ${editTask}>${task.text}</div>
+    <div id="task-text${task.id}" class="todo_task-text" ${editTask}>${task.text}</div>
     <img class="todo_task-edit" src="images/${editImage}.png" alt="edit" />
     <img class="todo_task-delete" src="images/delete.png" alt="delete"
     />
@@ -122,7 +121,7 @@ dom.tasks.onclick = (event) => {
     const task = target.parentElement;
     const taskId = task.getAttribute("id");
     changeEditStatus (taskId, tasks);
-    // editTask(taskId, tasks);
+    editTask(taskId, tasks);
     taskRender(tasks);
   }
 };
@@ -149,7 +148,9 @@ function deleteTask(id, array) {
 function editTask(id, array) {
   array.forEach((task) => {
     if (task.id == id) {
-      task.text = "изменен";
+      let taskTextElement = document.getElementById("task-text" + id);
+      let taskText = taskTextElement.textContent;
+      task.text = taskText;
     }
   });
 }
