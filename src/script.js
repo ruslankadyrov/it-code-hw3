@@ -29,6 +29,7 @@ function addTask(text, array) {
     id: timeStamp,
     text: text,
     isComplele: false,
+    isEdit: false,
   };
 
   array.push(task);
@@ -54,6 +55,8 @@ function taskRender(array) {
   array.forEach((task) => {
     let classToDoTask = "";
     let checkboxChecked = "";
+    let editTask = "";
+    let editImage = "";
 
     if (task.isComplele) {
       classToDoTask = "todo_task todo_task_task_complete";
@@ -67,14 +70,22 @@ function taskRender(array) {
       checkboxChecked = "";
     }
 
+    if (task.isEdit) {
+      editTask = 'contenteditable ="true"';
+      editImage = "save"
+    } else {
+      editTask = "";
+      editImage = "edit"
+    }
+
     const taskHtml = `
     <div id="${task.id}" class="${classToDoTask}">
     <label class="todo_checkbox">
       <input type="checkbox" ${checkboxChecked} />
       <div class="todo_checkbox-div"></div>
     </label>
-    <div class="todo_task-text" contenteditable ="false">${task.text}</div>
-    <img class="todo_task-edit" src="images/edit.png" alt="edit" />
+    <div class="todo_task-text" ${editTask}>${task.text}</div>
+    <img class="todo_task-edit" src="images/${editImage}.png" alt="edit" />
     <img class="todo_task-delete" src="images/delete.png" alt="delete"
     />
     </div>
@@ -110,7 +121,8 @@ dom.tasks.onclick = (event) => {
   if (isEditElement) {
     const task = target.parentElement;
     const taskId = task.getAttribute("id");
-    editTask(taskId, tasks);
+    changeEditStatus (taskId, tasks);
+    // editTask(taskId, tasks);
     taskRender(tasks);
   }
 };
@@ -143,3 +155,12 @@ function editTask(id, array) {
 }
 
 // document.getElementById("name").focus()
+
+//функция изменения ствтуса редактирования
+function changeEditStatus(id, array) {
+  array.forEach((task) => {
+    if (task.id == id) {
+      task.isEdit = !task.isEdit;
+    }
+  });
+}
